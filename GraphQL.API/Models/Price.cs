@@ -7,5 +7,7 @@
         public decimal FinalPrice { get; set; }
 
         public decimal SalesPrice { get; set; }
+
+        public string FormattedPrice { get; set; }
     }
 }

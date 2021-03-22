@@ -1,8 +1,8 @@
 namespace GraphQL.API
 {
-    using GraphQL.API.Data;
     using GraphQL.API.Queries;
     using GraphQL.API.Resolvers;
+    using GraphQL.API.Services;
     using GraphQL.API.Types;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -24,6 +24,8 @@ namespace GraphQL.API
         {
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IPriceService, PriceService>();
+            services.AddSingleton<IPriceConverter, PriceConverter>();
+
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>()

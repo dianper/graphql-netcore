@@ -1,7 +1,7 @@
 ﻿namespace GraphQL.API.Resolvers
 {
-    using GraphQL.API.Data;
     using GraphQL.API.Models;
+    using GraphQL.API.Services;
     using HotChocolate;
     using HotChocolate.Types;
     using System.Threading.Tasks;

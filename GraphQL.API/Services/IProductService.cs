@@ -1,4 +1,4 @@
-﻿namespace GraphQL.API.Data
+﻿namespace GraphQL.API.Services
 {
     using GraphQL.API.Models;
     using System.Collections.Generic;

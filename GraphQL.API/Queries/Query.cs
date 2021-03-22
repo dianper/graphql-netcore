@@ -1,7 +1,7 @@
 ﻿namespace GraphQL.API.Queries
 {
-    using GraphQL.API.Data;
     using GraphQL.API.Models;
+    using GraphQL.API.Services;
     using HotChocolate;
     using System.Collections.Generic;
     using System.Threading.Tasks;

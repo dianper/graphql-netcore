@@ -1,6 +1,5 @@
 ﻿namespace GraphQL.API.Types
 {
-    using GraphQL.API.Data;
     using GraphQL.API.Models;
     using GraphQL.API.Resolvers;
     using HotChocolate.Types;
