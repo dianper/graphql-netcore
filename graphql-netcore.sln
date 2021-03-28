@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.API.Tests", "src\Gr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Core", "src\GraphQL.Core\GraphQL.Core.csproj", "{A8F59F5D-AECF-4413-A91A-71E7751F8686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Infrastructure", "src\GraphQL.Infrastructure\GraphQL.Infrastructure.csproj", "{6DA060D2-C851-4032-AE0C-C4BE1E4C92F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Infrastructure", "src\GraphQL.Infrastructure\GraphQL.Infrastructure.csproj", "{6DA060D2-C851-4032-AE0C-C4BE1E4C92F0}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3453CB0A-75CB-4A91-92EC-392FA57CDE97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6DA060D2-C851-4032-AE0C-C4BE1E4C92F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA060D2-C851-4032-AE0C-C4BE1E4C92F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA060D2-C851-4032-AE0C-C4BE1E4C92F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3453CB0A-75CB-4A91-92EC-392FA57CDE97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3453CB0A-75CB-4A91-92EC-392FA57CDE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3453CB0A-75CB-4A91-92EC-392FA57CDE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3453CB0A-75CB-4A91-92EC-392FA57CDE97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
