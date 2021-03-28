@@ -9,5 +9,9 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GraphQL.Infrastructure\GraphQL.Infrastructure.csproj" />
+  </ItemGroup>
+
 
 </Project>

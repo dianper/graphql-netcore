@@ -1,9 +1,12 @@
 namespace GraphQL.API
 {
+    using GraphQL.API.Configurations;
     using GraphQL.API.Queries;
     using GraphQL.API.Resolvers;
-    using GraphQL.API.Services;
     using GraphQL.API.Types;
+    using GraphQL.Core.Repositories;
+    using GraphQL.Infrastructure.Data;
+    using GraphQL.Infrastructure.Repositories;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -12,25 +15,30 @@ namespace GraphQL.API
 
     public class Startup
     {
+        private readonly ApiConfiguration apiConfiguration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.apiConfiguration = configuration.Get<ApiConfiguration>();
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductService, ProductService>();
-            services.AddSingleton<IPriceService, PriceService>();
-            services.AddSingleton<IPriceConverter, PriceConverter>();
+            // Configurations
+            services.AddSingleton(this.apiConfiguration.MongoDbConfiguration);
 
+            // Repositories
+            services.AddSingleton<ICatalogContext, CatalogContext>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            // GraphQL
             services
                 .AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<ProductType>()
-                .AddType<PriceResolver>();
+                .AddType<CategoryResolver>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
