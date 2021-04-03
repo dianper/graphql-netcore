@@ -1,26 +1,24 @@
 ﻿namespace GraphQL.Infrastructure.Data
 {
-    using GraphQL.Core.Entities;
     using GraphQL.Infrastructure.Configurations;
     using MongoDB.Driver;
 
     public class CatalogContext : ICatalogContext
     {
-        private const string ProductCollectionName = "Products";
-        private const string CategoryCollectionName = "Categories";
+        private readonly IMongoDatabase database;
 
         public CatalogContext(MongoDbConfiguration mongoDbConfiguration)
         {
             var client = new MongoClient(mongoDbConfiguration.ConnectionString);
-            var database = client.GetDatabase(mongoDbConfiguration.Database);
 
-            this.Categories = database.GetCollection<Category>(CategoryCollectionName);
-            this.Products = database.GetCollection<Product>(ProductCollectionName);
+            this.database = client.GetDatabase(mongoDbConfiguration.Database);
 
-            CatalogContextSeed.SeedData(this.Categories, this.Products);
+            CatalogContextSeed.SeedData(this.database);
         }
 
-        public IMongoCollection<Category> Categories { get; }
-        public IMongoCollection<Product> Products { get; }
+        public IMongoCollection<T> GetCollection<T>(string name)
+        {
+            return this.database.GetCollection<T>(name);
+        }
     }
 }

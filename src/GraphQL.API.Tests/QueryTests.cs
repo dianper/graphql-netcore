@@ -27,7 +27,7 @@ namespace GraphQL.API.Tests
                 .AddScoped<ICategoryRepository, CategoryRepository>() // Should be mocked
                 .AddScoped<IProductRepository, ProductRepository>() // Should be mocked
                 .AddGraphQL()
-                .AddQueryType<Query>()
+                .AddQueryType<ProductQuery>()
                 .AddType<ProductType>()
                 .AddType<CategoryResolver>()
                 .BuildRequestExecutorAsync();

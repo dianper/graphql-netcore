@@ -1,6 +1,7 @@
 namespace GraphQL.API
 {
     using GraphQL.API.Configurations;
+    using GraphQL.API.Mutations;
     using GraphQL.API.Queries;
     using GraphQL.API.Resolvers;
     using GraphQL.API.Types;
@@ -30,13 +31,19 @@ namespace GraphQL.API
 
             // Repositories
             services.AddSingleton<ICatalogContext, CatalogContext>();
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
             // GraphQL
             services
                 .AddGraphQLServer()
-                .AddQueryType<Query>()
+                .AddQueryType(d => d.Name("Query"))
+                    .AddTypeExtension<ProductQuery>()
+                    .AddTypeExtension<CategoryQuery>()
+                .AddMutationType(d => d.Name("Mutation"))
+                    .AddTypeExtension<ProductMutation>()
+                    .AddTypeExtension<CategoryMutation>()
                 .AddType<ProductType>()
                 .AddType<CategoryResolver>();
         }

@@ -6,12 +6,10 @@
 
     public class CatalogContextSeed
     {
-        public static void SeedData(
-            IMongoCollection<Category> categoryCollection,
-            IMongoCollection<Product> productCollection)
+        public static void SeedData(IMongoDatabase database)
         {
-            InsertCategories(categoryCollection);
-            InsertProducts(productCollection);
+            InsertCategories(database.GetCollection<Category>(nameof(Category)));
+            InsertProducts(database.GetCollection<Product>(nameof(Product)));
         }
 
         private static void InsertCategories(IMongoCollection<Category> categoryCollection)
