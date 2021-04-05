@@ -3,7 +3,7 @@
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
 
-    public class EntityBase
+    public class BaseEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

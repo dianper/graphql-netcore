@@ -8,7 +8,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class BaseRepository<T> : IBaseRepository<T> where T : EntityBase
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         private readonly IMongoCollection<T> collection;
 

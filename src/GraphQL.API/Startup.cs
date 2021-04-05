@@ -4,6 +4,7 @@ namespace GraphQL.API
     using GraphQL.API.Mutations;
     using GraphQL.API.Queries;
     using GraphQL.API.Resolvers;
+    using GraphQL.API.Subscriptions;
     using GraphQL.API.Types;
     using GraphQL.Core.Repositories;
     using GraphQL.Infrastructure.Data;
@@ -44,8 +45,11 @@ namespace GraphQL.API
                 .AddMutationType(d => d.Name("Mutation"))
                     .AddTypeExtension<ProductMutation>()
                     .AddTypeExtension<CategoryMutation>()
+                .AddSubscriptionType(d => d.Name("Subscription"))
+                    .AddTypeExtension<ProductSubscriptions>()
                 .AddType<ProductType>()
-                .AddType<CategoryResolver>();
+                .AddType<CategoryResolver>()
+                .AddInMemorySubscriptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +60,7 @@ namespace GraphQL.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseWebSockets();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

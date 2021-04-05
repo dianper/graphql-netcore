@@ -8,7 +8,6 @@
     {
         public ProductRepository(ICatalogContext catalogContext) : base(catalogContext)
         {
-
         }
     }
 }

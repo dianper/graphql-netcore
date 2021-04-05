@@ -8,7 +8,6 @@
     {
         public CategoryRepository(ICatalogContext catalogContext) : base(catalogContext)
         {
-
         }
     }
 }

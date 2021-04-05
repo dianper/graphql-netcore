@@ -1,6 +1,6 @@
 ﻿namespace GraphQL.Core.Entities
 {
-    public class Category : EntityBase
+    public class Category : BaseEntity
     {
         public string Description { get; set; }
     }
