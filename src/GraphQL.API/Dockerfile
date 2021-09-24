@@ -1,8 +1,5 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
-EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
@@ -15,9 +12,25 @@ WORKDIR "/src/src/GraphQL.API"
 RUN dotnet build "GraphQL.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "GraphQL.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "GraphQL.API.csproj" -c Release -r debian-x64 -o /app/publish
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GraphQL.API.dll"]
+ENV CORECLR_ENABLE_PROFILING="1" \
+CORECLR_PROFILER="{36032161-FFC0-4B61-B559-F6C5D41BAE5A}" \
+CORECLR_NEWRELIC_HOME="/usr/local/newrelic-netcore20-agent" \
+CORECLR_PROFILER_PATH="/usr/local/newrelic-netcore20-agent/libNewRelicProfiler.so" \
+NEW_RELIC_LICENSE_KEY="KEY" \
+NEW_RELIC_APP_NAME="graphqlapi"
+
+WORKDIR app
+
+ARG NewRelic=./newrelic
+COPY $NewRelic ./newrelic
+COPY $NewRelic ./newrelic
+
+RUN dpkg -i ./newrelic/newrelic-netcore20-agent*.deb
+
+ENV ASPNETCORE_URLS http://+:9000
+EXPOSE 9000
+
+WORKDIR /app/publish
+ENTRYPOINT ["dotnet", "./GraphQL.API.dll"]

@@ -20,4 +20,4 @@ services:
             - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
             - ${HOME}/.aspnet/https:/root/.aspnet/https/
         ports:
-            - "9006:80"
+            - "9006:9000"
